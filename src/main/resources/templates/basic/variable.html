@@ -24,9 +24,14 @@
 	</ul>
 	
 	<h1>지역변수 - (th:with)</h1>
-	<div th:with="first=${users[0]">
-		<p>처음 사람의 이름은 <span th:text="${first.username}"></span>
-	</div>
+	<ul th:with="first=${users[0]}">
+		<li>처음 사람의 이름은 <span th:text="${first.username}"></</span></li>
+		<li>처음 사람의 나이는 <span th:text="${first.age}"></span></li>
+	</ul>
+	<ul th:with="second=${users[1]}">
+		<li>2번째 사람의 이름은 <span th:text="${second.username}"></span></li>
+		<li>2번째 사람의 나이는 <span th:text="${second.age}"></span></li>
+	</ul>
 	
 </body>
 </html>
