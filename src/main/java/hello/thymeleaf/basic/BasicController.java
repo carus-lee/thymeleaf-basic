@@ -5,15 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/basic")
+@Slf4j
 public class BasicController {
 
 	@GetMapping("/text-basic")
@@ -51,6 +56,19 @@ public class BasicController {
 		return "/basic/variable";
 	}
 	
+	@GetMapping("/basic-objects")
+	public String basicObjects(HttpSession session)
+	{
+		log.trace("Trace Level 테스트"); 
+		log.debug("DEBUG Level 테스트"); 
+		log.info("INFO Level 테스트"); 
+		log.warn("Warn Level 테스트"); 
+		log.error("ERROR Level 테스트");
+
+		session.setAttribute("sessionData", "Hello Session");
+		return "basic/basic-objects";
+	}
+	
 	@Data
 	static class User 
 	{
@@ -61,6 +79,15 @@ public class BasicController {
 		{
 			this.username = username;
 			this.age = age;
+		}
+	}
+	
+	@Component("helloBean")
+	static class HelloBean
+	{
+		public String hello(String data)
+		{
+			return "Hello " + data;
 		}
 	}
 }
